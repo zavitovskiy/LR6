@@ -39,7 +39,14 @@ export async function renderTodosScreen(searchTerm = '', params) {
     if (todoCards.length === 0) {
         return createElement('p', { textContent: 'Задачи не найдены.' });
     }
-    return createElement('div', { className: 'content-area list-view' }, todoCards);
+    const infoBlock = createElement('div', { className: 'list-meta' }, [
+        createElement('span', { textContent: `Найдено задач: ${todoCards.length}` }),
+        userId ? createElement('span', { className: 'list-meta__hint', textContent: `Пользователь ID: ${userId}` }) : null,
+    ].filter(Boolean));
+    return createElement('div', {}, [
+        infoBlock,
+        createElement('div', { className: 'content-area list-view' }, todoCards),
+    ]);
 }
 
 
