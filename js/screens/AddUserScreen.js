@@ -10,13 +10,15 @@ export async function renderAddUserScreen(searchTerm, params, router) {
             // Собираем данные пользователя
             const formData = new FormData(e.target);
             const userData = {
-                name: formData.get('name'),
-                username: formData.get('username'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
+                name: formData.get('name')?.trim(),
+                username: formData.get('username')?.trim(),
+                email: formData.get('email')?.trim(),
+                phone: formData.get('phone')?.trim(),
             };
             // Собираем данные по Todos
-            const todoTitles = formData.getAll('todo-title');
+            const todoTitles = formData.getAll('todo-title')
+                .map(title => title.trim())
+                .filter(Boolean);
             const userTodos = todoTitles.map(title => ({ title })); 
             
             // Вызываем API
@@ -24,6 +26,9 @@ export async function renderAddUserScreen(searchTerm, params, router) {
             
             // Перенаправляем на главную
             router.navigate('#users');
+            e.target.reset();
+            todosContainer.innerHTML = '';
+            todosContainer.appendChild(createTodoInput());
         },
     });
 

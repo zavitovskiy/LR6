@@ -180,6 +180,25 @@ body {
     color: #888;
     word-break: break-all;
 }
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 8px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    background-color: rgba(31, 111, 235, 0.12);
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.badge-local::before {
+    content: '●';
+    font-size: 10px;
+}
 
 .card-footer {
     margin-top: 15px;

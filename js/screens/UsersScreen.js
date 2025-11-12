@@ -2,11 +2,18 @@ import { createElement } from '../utils.js';
 import { api } from '../api.js';
 
 function createUserCard(user, onDelete) {
+    const titleChildren = [
+        createElement('a', { href: `#users#${user.id}#posts`, textContent: user.name })
+    ];
+
+    if (user.isLocal) {
+        titleChildren.push(
+            createElement('span', { className: 'badge badge-local', textContent: 'Локально' })
+        );
+    }
+
     const cardChildren = [
-        createElement('h3', {}, [
-            // Ссылки на посты и тудушки
-             createElement('a', { href: `#users#${user.id}#posts`, textContent: user.name })
-        ]),
+        createElement('h3', {}, titleChildren),
         createElement('p', { textContent: user.username }),
         createElement('p', { className: 'email', textContent: user.email }),
         createElement('p', { textContent: user.phone }),
